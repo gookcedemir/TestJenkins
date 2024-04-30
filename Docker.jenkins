@@ -16,7 +16,7 @@ pipeline {
         stage('Execute Python Script') {
             agent {docker {image 'python'}}
             steps {
-                sh 'script.py'
+                sh 'python script.py'
             }
         }
     }
