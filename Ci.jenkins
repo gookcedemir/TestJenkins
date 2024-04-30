@@ -12,15 +12,13 @@ pipeline {
                 echo "Hello ${NAME} ${SUFFIX}"
                 writeFile file: 'newData.txt', text: 'From Stage Hello'
                 stash name: 'newData', includes: 'newData.txt'
-                sh 'ls'
             }
         }
         stage('Goodbye') {
             steps {
-                unstash name:'demo'
+                unstash name:'newData'
                 echo "Goodbye ${NAME}"
                 readFile file: 'newData.txt'
-                sh 'ls'
             }
         }
     }
