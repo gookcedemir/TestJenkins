@@ -2,8 +2,6 @@ pipeline {
     agent any
     environment {
         NAME = 'Gökce'
-        FILE= 'newData.txt'
-        FILENAME= 'newData'
     }
     stages {
         stage('Hello') {
@@ -12,20 +10,15 @@ pipeline {
             }
             steps {
                 echo "Hello ${NAME} ${SUFFIX}"
-                writeFile file: ${FILE}, text: 'From Stage Hello'
-                stash name: ${FILENAME}, includes: ${FILE}
-                sh 'ls'
+                writeFile file: 'newData.txt', text: 'From Stage Hello'
+                stash name: 'newData', includes: 'newData.txt'
             }
         }
         stage('Goodbye') {
             steps {
-                unstash name: ${FILENAME}
+                unstash name:'newData'
                 echo "Goodbye ${NAME}"
-
-                script {
-                    readFile file: ${FILE}
-                    sh 'ls' 
-                }
+                readFile file: 'newData.txt'
             }
         }
     }
