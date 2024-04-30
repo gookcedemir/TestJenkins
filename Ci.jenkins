@@ -1,10 +1,22 @@
 pipeline {
     agent any
-
+    environment {
+        NAME = 'Gökce'
+    }
     stages {
-        stage('Hello World') {
+        stage('Hello') {
+            environment {
+                SUFFIX = '!'
+            }
             steps {
-                echo 'Hello World!'
+                echo 'Hello ${NAME} ${SUFFIX}'
+                sh 'printenv'
+            }
+        }
+        stage('Goodbye') {
+            steps {
+                echo 'Goodbye ${NAME}'
+                sh 'printenv'
             }
         }
     }
