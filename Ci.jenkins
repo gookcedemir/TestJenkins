@@ -9,13 +9,13 @@ pipeline {
                 SUFFIX = '!'
             }
             steps {
-                echo 'Hello ${NAME} ${SUFFIX}'
+                echo "Hello ${NAME} ${SUFFIX}"
                 sh 'printenv'
             }
         }
         stage('Goodbye') {
             steps {
-                echo 'Goodbye ${NAME}'
+                echo "Goodbye ${NAME}"
                 sh 'printenv'
             }
         }
