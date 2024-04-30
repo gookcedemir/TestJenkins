@@ -10,13 +10,17 @@ pipeline {
             }
             steps {
                 echo "Hello ${NAME} ${SUFFIX}"
-                sh 'printenv'
+                writeFile(file: 'data.txt', text: 'From Stage Hello')
+                stash(name: 'demo', includes: 'data.txt')
+                sh 'ls'
             }
         }
         stage('Goodbye') {
             steps {
+                unstash(name:'demo')
                 echo "Goodbye ${NAME}"
-                sh 'printenv'
+                readFile(file: 'data.txt')
+                sh 'ls'
             }
         }
     }
