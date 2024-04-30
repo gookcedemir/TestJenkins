@@ -7,12 +7,6 @@ pipeline {
                 sh 'mvn -v'
             }
         }
-        stage('Check Docker Java') {
-            agent {docker {image 'openjdk:8-alpine'}}
-            steps {
-                sh 'java -version'
-            }
-        }
         stage('Check Cloud') {
             agent {label 'dind'}
             steps {
